@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-// import { PokemonDetails } from "./PokemonDetails";
+
 const PokemonThumbnail = ({ id, image, name, type }) => {
   const style = type + " thumb-container";
 

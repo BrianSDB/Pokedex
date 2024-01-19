@@ -7,13 +7,16 @@ const baseUrl = "https://pokeapi.co/api/v2/pokemon/mewtwo";
 
 export const Pokedex = () => {
   const [pokemon, setPokemon] = useState(null);
-  // const [evolved, setEvolved] = useState("");
+  const [error, setError] = useState(null);
   const inputRef = useRef(null);
   const pokemonCache = useRef(new Map());
 
   useEffect(() => {
     fetch(baseUrl)
       .then((response) => {
+        if (!response.ok) {
+          setError(true);
+        }
         return response.json();
       })
       .then((json) => {
@@ -29,15 +32,18 @@ export const Pokedex = () => {
     }
     fetch(`https://pokeapi.co/api/v2/pokemon/${pokeName}`)
       .then((response) => {
+        if (!response.ok) {
+          setError(true);
+        }
         return response.json();
       })
       .then((json) => {
         setPokemon(json);
         pokemonCache.current.set(pokeName, json);
+        setError(null);
       });
   }
 
-  console.log(pokemon);
   return (
     <div className="pokemonContainer">
       <div className="head">
@@ -45,11 +51,12 @@ export const Pokedex = () => {
       </div>
       <div className="header">
         <input type="text" ref={inputRef} placeholder="Search for pokemon.." />
+
         <button id="search" onClick={searchPokemon}>
           Search Pokedex
         </button>
       </div>
-
+      {error ? <p>Pokemon does not exist</p> : ""}
       <div className="pokemonData">
         <h1>{pokemon?.name.toUpperCase()}</h1>
         <img
@@ -59,7 +66,7 @@ export const Pokedex = () => {
           }
           alt="Pokemon"
         />
-        <ul>
+        <ul className="pokedex-stats">
           <li>
             {" "}
             Type: <span>{pokemon?.types[0].type.name}</span>
@@ -77,9 +84,12 @@ export const Pokedex = () => {
           </li>
         </ul>
       </div>
-      <Link className="link" to="/Pokemon">
-        Discover Pokedex
-      </Link>
+      <div className="footer">
+        {" "}
+        <Link className="p-link" to="/Pokemon">
+          Discover Pokedex
+        </Link>
+      </div>
     </div>
   );
 };
