@@ -11,10 +11,19 @@ const PokemonThumbnail = ({ id, image, name, type }) => {
       <img src={image} alt={name} />
       <div className="detail-wrapper">
         <h3>{name}</h3>
-        <small>Type: {type}</small>
+      </div>
+      <div className="card-types">
+        <small> {type}</small>
       </div>
     </div>
   );
 };
 
 export default PokemonThumbnail;
+// {/* <div className="card-types">
+//   {pokemon.types.map((type) => (
+//     <span key={type.type.name} className={type.type.name}>
+//       {type.type.name}
+//     </span>
+//   ))}
+// </div>; */}

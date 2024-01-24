@@ -1,5 +1,10 @@
 import { useState, useEffect, useRef } from "react";
 import pokedex from "../assets/Pokédex_logo.png";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+
+import pokeball from "../assets/Pokemon-Pokeball.png";
 
 import { Link } from "react-router-dom";
 
@@ -46,27 +51,28 @@ export const Pokedex = () => {
 
   return (
     <div className="pokemonContainer">
-      <div className="head">
-        <img className="pokedex" src={pokedex} />
-      </div>
+      <img className="pokedex" src={pokedex} />
+      <img id="pokeball" src={pokeball} alt="pokeballImg" />
       <div className="header">
         <input type="text" ref={inputRef} placeholder="Search for pokemon.." />
-
         <button id="search" onClick={searchPokemon}>
-          Search Pokedex
+          <FontAwesomeIcon icon={faMagnifyingGlass} />
         </button>
       </div>
       {error ? <p>Pokemon does not exist</p> : ""}
-      <div className="pokemonData">
-        <h1>{pokemon?.name.toUpperCase()}</h1>
-        <img
-          src={
-            pokemon?.sprites?.versions["generation-v"]["black-white"].animated
-              .front_default
-          }
-          alt="Pokemon"
-        />
-        <ul className="pokedex-stats">
+      <div className="card-container">
+        <div className="poke-content">
+          <h2> {pokemon?.name.toUpperCase()}</h2>
+          <img
+            id="pokemonImg"
+            src={
+              pokemon?.sprites?.versions["generation-v"]["black-white"].animated
+                .front_default
+            }
+            alt="Pokemon"
+          />
+        </div>
+        <div className="abilities">
           <li>
             {" "}
             Type: <span>{pokemon?.types[0].type.name}</span>
@@ -82,12 +88,13 @@ export const Pokedex = () => {
             </span> and {""}
             <span>{pokemon?.abilities[1].ability.name}</span>
           </li>
-        </ul>
+        </div>
       </div>
+      {/* </div> */}{" "}
       <div className="footer">
-        {" "}
         <Link className="p-link" to="/Pokemon">
           Discover Pokedex
+          <FontAwesomeIcon icon={faArrowRight} />
         </Link>
       </div>
     </div>
