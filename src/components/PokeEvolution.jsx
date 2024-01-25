@@ -77,6 +77,7 @@ const PokeEvolution = () => {
                 value={valueSearch}
                 onChange={onInputChange}
                 placeholder="Search pokemon"
+                required
               />
             </div>
 

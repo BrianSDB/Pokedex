@@ -16,9 +16,11 @@ export const SearchComponent = () => {
 
   return (
     <>
-      <Link to="/Pokemon" className="link">
-        Return to Pokedex
-      </Link>
+      <div className="return">
+        <Link to="/Pokemon" className="link">
+          Return to Pokedex
+        </Link>
+      </div>
       <div className="container">
         <p className="p-search">
           We found <span>{filteredPokemons.length}</span> results:
