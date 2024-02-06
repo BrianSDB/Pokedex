@@ -139,7 +139,56 @@ h1 {
   background-color: grey;
   margin-left: 10px;
 }
-.content-img {
+.signup-container,
+.login-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 70vh;
+}
+.signup-header,
+.login-header {
+  padding-bottom: 30px;
+  font-size: 30px;
+  color: indigo;
+}
+.signup-content,
+.login-content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.signup-content input,
+.login-container input {
+  padding: 15px;
+  width: 350px;
+  border: transparent;
+  border-radius: 15px;
+  background-color: rgb(221, 216, 216);
+}
+.signup-button,
+.login-button {
+  padding: 15px;
+  width: 200px;
+  margin-top: 20px;
+  border-radius: 15px;
+  color: white;
+  background-color: indigo;
+  font-size: 20px;
+  text-align: center;
+}
+.signup-button,
+.login-button:hover {
+  background-color: rgb(139, 18, 226);
+  box-shadow: 2px 2px 2px darkmagenta;
+  cursor: pointer;
+}
+.signup-redirect,
+.login-redirect {
+  margin-top: 40px;
 }
 #pokemonImg {
   width: 200px;
@@ -155,6 +204,20 @@ p {
 }
 span {
   font-weight: bold;
+}
+.logout {
+  padding: 5px;
+  width: 150px;
+  margin-top: 10px;
+  background-color: indigo;
+  color: white;
+  font-size: 20px;
+  border-radius: 15px;
+}
+.logout:hover {
+  background-color: rgb(139, 18, 226);
+  cursor: pointer;
+  box-shadow: 2px 2px 2px darkmagenta;
 }
 .p-link {
   margin-top: 20px;
@@ -224,17 +287,6 @@ li {
   height: 100%;
 }
 
-.pokemon-card {
-  /* border: 3px solid black;
-  border-radius: 15px;
-  margin: 100px 15px 0 15px;
-  box-shadow: 3px 5px 3px 2px rgb(42, 42, 66); */
-}
-/* .pokemon-card:hover {
-  transform: scale(1.1);
-  transition: ease-in-out 0.5s;
-  border-radius: 40px;
-} */
 .detail-header {
   width: 100%;
   text-align: center;

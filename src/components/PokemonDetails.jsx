@@ -5,12 +5,12 @@ import { Link, useParams } from "react-router-dom";
 import { PokemonContext } from "../context/PokemonContext";
 import Loader from "./Loader";
 import { capitalFirstLetter } from "../helper/helper";
-const evoUrl = "https://pokeapi.co/api/v2/evolution-chain/{id}/";
+// const evoUrl = "https://pokeapi.co/api/v2/evolution-chain";
 
 export const PokemonDetails = () => {
   const { getPokemonByID } = useContext(PokemonContext);
   const [pokemon, setPokemon] = useState({});
-  const [evolution, setEvolution] = useState([]);
+  // const [evolution, setEvolution] = useState([]);
 
   const [loading, setLoading] = useState(true);
 
@@ -20,12 +20,6 @@ export const PokemonDetails = () => {
     const data = await getPokemonByID(id);
     setPokemon(data);
     setLoading(false);
-    fetch(`${evoUrl}/${id}`)
-      .then((response) => response.json())
-      .then((json) => {
-        console.log(json);
-        setEvolution(json);
-      });
   };
 
   const style = pokemon?.types?.map((style) => {
@@ -38,7 +32,15 @@ export const PokemonDetails = () => {
   useEffect(() => {
     fetchPokemon(id);
   }, []);
-  console.log(evolution);
+  // useEffect(() => {
+  //   fetch(`${evoUrl}/${id}`)
+  //     .then((response) => response.json())
+  //     .then((json) => {
+  //       // setEvolution(json);
+  //       console.log(json);
+  //     });
+  // }, []);
+  // console.log(evolution.chain?.evolves_to[0].species.name);
   return (
     <>
       <main className="container main-pokemon">
@@ -51,6 +53,13 @@ export const PokemonDetails = () => {
           <>
             <div className="header-main-pokemon">
               <span className="number-pokemon">#{pokemon.id}</span>
+              {/* <div>
+                <p>
+                  {evolution.chain?.species?.name} evolves to{" "}
+                  {evolution.chain?.evolves_to[0]?.species.name} and{" "}
+                  {evolution.chain?.evolves_to[0]?.evolves_to[0].species.name}
+                </p>
+              </div> */}
 
               <div className="container-info-pokemon">
                 <h1>{capitalFirstLetter(pokemon.name)}</h1>
@@ -64,11 +73,11 @@ export const PokemonDetails = () => {
                 <div className="info-pokemon">
                   <div className="group-info">
                     <p>Height</p>
-                    <span>{pokemon.height}</span>
+                    <span>{pokemon.height / 10}M</span>
                   </div>
                   <div className="group-info">
                     <p>Weight</p>
-                    <span>{pokemon.weight}KG</span>
+                    <span>{pokemon.weight / 10}KG</span>
                   </div>
                 </div>
               </div>

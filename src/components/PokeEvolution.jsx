@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import { useState, useEffect, useContext } from "react";
 import PokemonThumbnail from "./PokemonThumbnail";
 import { Link } from "react-router-dom";
@@ -7,9 +6,9 @@ import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 import { PokemonContext } from "../context/PokemonContext";
 import Loader from "./Loader";
+import { useLocation } from "react-router-dom";
 
 const PokeEvolution = () => {
-  // const [error, setError] = useState(null);
   const [allPokemons, setAllPokemons] = useState([]);
   const [loadMore, setLoadMore] = useState(
     "https://pokeapi.co/api/v2/pokemon?limit=20"
@@ -23,6 +22,7 @@ const PokeEvolution = () => {
     useContext(PokemonContext);
 
   const navigate = useNavigate();
+  const location = useLocation();
 
   const onSearchSubmit = (e) => {
     e.preventDefault();
@@ -47,7 +47,7 @@ const PokeEvolution = () => {
           `https://pokeapi.co/api/v2/pokemon/${pokemon.name}`
         );
         const data = await res.json();
-        // console.log(data);
+
         setAllPokemons((currentList) => [...currentList, data]);
         await allPokemons.sort((a, b) => a.id - b.id);
       });
@@ -58,9 +58,17 @@ const PokeEvolution = () => {
   useEffect(() => {
     getAllPokemons();
   }, []);
+  function Logout() {
+    navigate("/login");
+    window.localStorage.removeItem("isLoggedIn");
+  }
 
   return (
     <div className="app-contaner">
+      <h1>Welcome {location.state?.id} !</h1>
+      <button className="logout" onClick={Logout}>
+        Log out
+      </button>
       <Link className="link" to="/">
         Back
       </Link>
@@ -87,11 +95,11 @@ const PokeEvolution = () => {
           </form>
 
           <div className="all-container">
-            {allPokemons.map((pokemonStats, index) => (
+            {allPokemons.map((pokemonStats) => (
               <>
                 <Link className="link" to={`/Pokemon/${pokemonStats.id}`}>
                   <PokemonThumbnail
-                    key={index}
+                    key={pokemonStats.id}
                     id={pokemonStats.id}
                     image={pokemonStats.sprites.other.dream_world.front_default}
                     name={pokemonStats.name}

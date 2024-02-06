@@ -20,10 +20,3 @@ const PokemonThumbnail = ({ id, image, name, type }) => {
 };
 
 export default PokemonThumbnail;
-// {/* <div className="card-types">
-//   {pokemon.types.map((type) => (
-//     <span key={type.type.name} className={type.type.name}>
-//       {type.type.name}
-//     </span>
-//   ))}
-// </div>; */}

@@ -12,7 +12,7 @@ export const WelcomePage = () => {
           media entertainment such as TV series, movies, card games, clothes,
           among others, becoming a brand that is recognized in the world market.
         </p>
-        <a className="inter-bold btn-home" href="/Pokemon">
+        <a className="inter-bold btn-home" href="/login">
           <span>Explore Pokedex</span>
           <svg
             className="w-6 h-6"
